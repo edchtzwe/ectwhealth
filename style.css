@@ -1,0 +1,45 @@
+BODY {
+	FONT-SIZE: 12px; FONT-FAMILY: verdana, arial, sans-serif; PADDING-LEFT: 25%; PADDING-RIGHT:25%;
+}
+
+.details {
+	background-color: #8CB1B7;
+	width: 300px;
+	MARGIN-LEFT: 2%;
+}
+
+#gender {
+	width: 300px;
+	MARGIN-LEFT: 2%;
+}
+
+.bodpic {
+	MARGIN-LEFT: 12%;
+}
+
+::-webkit-input-placeholder {
+   color: black;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: black;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: black;  
+}
+
+:-ms-input-placeholder {  
+   color: black;  
+}
+
+input[type="radio"] {
+    display: none;
+    MARGIN-LEFT: 12%;
+}
+input[type="radio"]:checked + label {
+    border-bottom: 3px solid red;  
+}
+input[type="submit"] {
+	margin-left: 2%;	
+}
