@@ -5,7 +5,9 @@
 	FONT-SIZE: 12px; FONT-FAMILY: verdana, arial, sans-serif
 }
 </STYLE>
-
+<?php
+if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+?>
 </HEAD>
 <BODY>
 <FIELDSET>
@@ -14,9 +16,9 @@
 <P>Age: <INPUT name=age pattern="\d+" required></P>
 <P>Gender: <SELECT name=gender><OPTION selected value=1>Male</OPTION><OPTION 
   value=2>Female</OPTION></SELECT></P>
-<P>Weight: <INPUT value=kg name=weight_kg onfocus="this.value='';" >&nbsp;OR <INPUT value=lbs 
-name=weight_lbs onfocus="this.value='';" ></P>
-<P>Height: <INPUT value=cm name=height_cm onfocus="this.value='';" >&nbsp;OR <SELECT 
+<P>Weight: <INPUT placeholder=kg name=weight_kg>&nbsp;OR <INPUT placeholder=lbs 
+name=weight_lbs></P>
+<P>Height: <INPUT placeholder=cm name=height_cm>&nbsp;OR <SELECT 
   name=height_feet><OPTION selected value=0>feet</OPTION><OPTION 
   value=1>4</OPTION><OPTION value=2>5</OPTION><OPTION value=3>6</OPTION><OPTION 
   value=4>7</OPTION></SELECT>&nbsp;AND <SELECT name=height_inches><OPTION 
@@ -27,4 +29,11 @@ name=weight_lbs onfocus="this.value='';" ></P>
   value=0>inches</OPTION></SELECT></P>
 <P><INPUT type=submit value=Submit name=submit><LABEL 
 for=submit></LABEL></P></FORM>
-<P></P></FIELDSET> </BODY></HTML>
+<P></P></FIELDSET> 
+<?php
+	echo('<p>' . $_SESSION['error_message'] . '</p>');
+	echo('Your BMR is ' . $_SESSION['bmr']);
+	$_SESSION['error_message'] = '';
+	$_SESSION['bmr'] = '';
+?>
+</BODY></HTML>

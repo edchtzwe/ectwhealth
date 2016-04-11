@@ -1,5 +1,9 @@
 <?PHP
-
+$_use_cm = true;
+$_use_kg = true;
+if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+$_SESSION['error_message'] = '';
+$_SESSION['bmr'] = '';
 calculate();
 
 function calculate()
@@ -7,76 +11,99 @@ function calculate()
 	$age = $_POST['age'];
 	$height_cm = $_POST['height_cm'];
 	$height = 0;
-	$weight_kg = $_POST['weight_cm'];
+	$weight_kg = $_POST['weight_kg'];
 	$weight = 0;
-	inputCheck();		
+	$bmr = 0;
+	inputCheck();
+	checkFormats();
 	
-	if($_POST['gender'] == 1){
-		
+	if($_use_cm == true){
+		$height = $height_cm;
 	}
 	else{
-		echo('female');
+		$height = convertFeetAndInches();	
 	}
+	
+	if($_use_kg == true){
+		$weight = $weight_kg;
+	}
+	else{
+		$weight = convertLbs();
+	}
+	
+	if($_POST['gender'] == 1){
+		//male
+		$bmr = 66 + (13.7 * $weight) + (5 * $height) - (6.8 * $age);
+	}
+	else{
+		//female		
+	}	
+	
+	
+	$_SESSION['bmr'] = round($bmr);
+	//header('Location: daily_calorie_needs.php');
+	
 }
 
 function inputCheck()
 {
-	$message = 'Errors were found. ';
+	$message = '';
 	$check = false;
 	
 	//user ignored height
-	if($_POST['height_cm'] == 'cm' && $_POST['height_feet'] == 0 && $_POST['height_inches'] == 0){
+	if($_POST['height_cm'] == '' && $_POST['height_feet'] == 0 && $_POST['height_inches'] == 0){
 		$check = true;
 		$message = $message . 'Invalid height. ';
 	}
 	
 	//user tries to mess with height inches
-	if(($_POST['height_cm'] != 'cm' && ($_POST['height_feet'] != 0 && $_POST['height_inches'] == 0))){
+	if(($_POST['height_cm'] != '' && ($_POST['height_feet'] != 0 && $_POST['height_inches'] == 0))){
 		$check = true;
 		$message = $message . 'Mismatching height formats. ';
 	}
 	
 	//user tries to mess with height feet
-	if(($_POST['height_cm'] != 'cm' && ($_POST['height_feet'] == 0 && $_POST['height_inches'] != 0))){
+	if(($_POST['height_cm'] != '' && ($_POST['height_feet'] == 0 && $_POST['height_inches'] != 0))){
 		$check = true;
 		$message = $message . 'Mismatching height formats. ';
 	}
 	
 	//user ignored weight
-	if($_POST['weight_kg'] == 'kg' && $_POST['weight_lbs'] == 'lbs'){
+	if($_POST['weight_kg'] == '' && $_POST['weight_lbs'] == ''){
 		$check = true;
 		$message = $message . 'Invalid weight. ';
 	}
 	
 	
 	if($check == true){
-		echo($message);	
-		//header('Location: daily_calorie_needs.php');
-	}
+		$_SESSION['error_message'] = 'Errors were found. ' . $message;		
+		echo($message);
+		//add button to go back
+	}	
 }
 
-function checkWeightFormat()
+function checkFormats()
 {
-	if($_POST['weight_kg'] == 'cm' || $_POST['weight_kg'] < 1&& ($_POST['weight_cm'] != 'lbs' && $_POST['weight_cm'] > 0)){		
-		//we know the user uses lbs
-		//unit conversion
-		return convertLbs();		
+	if($_POST['height_cm'] != '' && $_POST['height_cm'] > 0){
+		$_use_cm = true;
+	}
+	else{
+		$_use_cm = false;
+	}
+	
+	if($_POST['weight_kg'] != '' && $_POST['weight_kg'] > 0){
+		$_use_kg = true;
+	}
+	else{
+		$_use_kg = false;	
 	}
 }
 
 function convertLbs()
-{
+{	
 	return ($_POST['weight_lbs'] * 2.2);
 }
 
-function checkHeightFormat()
-{
-	if(($_POST['height_cm'] == 'cm' || $_POST['height_cm'] < 1) && ($_POST['height_feet'] != 'feet')){		
-		//we know the user uses feet and inches
-		//unit conversion
-		return convertFeetAndInches();		
-	}
-}
 
 function convertFeetAndInches()
 {
