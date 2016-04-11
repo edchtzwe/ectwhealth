@@ -1,9 +1,10 @@
 <?PHP
 $_use_cm = true;
 $_use_kg = true;
-if (session_status() !== PHP_SESSION_ACTIVE) {session_start();}
+session_start();
 $_SESSION['error_message'] = '';
 $_SESSION['bmr'] = '';
+$_SESSION['gender'] = '';
 calculate();
 
 function calculate()
@@ -14,13 +15,14 @@ function calculate()
 	$weight_kg = $_POST['weight_kg'];
 	$weight = 0;
 	$bmr = 0;
+	global $_use_cm, $_use_kg;
 	inputCheck();
 	checkFormats();
 	
 	if($_use_cm == true){
 		$height = $height_cm;
 	}
-	else{
+	else{		
 		$height = convertFeetAndInches();	
 	}
 	
@@ -30,24 +32,25 @@ function calculate()
 	else{
 		$weight = convertLbs();
 	}
-	
+	//echo($weight . ' ' . $height . ' ' . $age);	
 	if($_POST['gender'] == 1){
 		//male
 		$bmr = 66 + (13.7 * $weight) + (5 * $height) - (6.8 * $age);
 	}
 	else{
 		//female		
-	}	
-	
+	}		
 	
 	$_SESSION['bmr'] = round($bmr);
-	//header('Location: daily_calorie_needs.php');
-	
+	$_SESSION['gender'] = $_POST['gender'];
+	header('Location: daily_calorie_needs.php');
+	//echo($bmr);
 }
 
 function inputCheck()
 {
 	$message = '';
+	$_SESSION['error_message'] = '';
 	$check = false;
 	
 	//user ignored height
@@ -84,6 +87,8 @@ function inputCheck()
 
 function checkFormats()
 {
+	global $_use_cm, $_use_kg;
+
 	if($_POST['height_cm'] != '' && $_POST['height_cm'] > 0){
 		$_use_cm = true;
 	}
@@ -96,7 +101,7 @@ function checkFormats()
 	}
 	else{
 		$_use_kg = false;	
-	}
+	}	
 }
 
 function convertLbs()
