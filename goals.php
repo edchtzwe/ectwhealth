@@ -5,15 +5,15 @@
 </HEAD>
 <BODY>
 <FIELDSET>
-<LEGEND>Male Body Chart</LEGEND>
+<LEGEND>Select Goals</LEGEND>
 <FORM method=post action='estimate_process.php'>
 <P>
 <INPUT type=radio value=0 id='a' name=bod>
-<LABEL FOR='a'> <img class='bodpic' src="men-fat.jpg"/> </LABEL>
+<LABEL FOR='a'> Lose Weight. </LABEL>
 <INPUT type=radio id='b' value=1 name=bod>
-<LABEL FOR='b'> <img class='bodpic' src="men-regular.jpg"/> </LABEL>
+<LABEL FOR='b'> Maintain Weight. </LABEL>
 <INPUT type=radio value=2 id='c' name=bod>
-<LABEL FOR='c'> <img class='bodpic' src="men-fit.jpg"/> </LABEL>
+<LABEL FOR='c'> Gain Weight. </LABEL>
 </P>
 
 <P><INPUT type=submit value=Estimate name=Estimate></FORM></FIELDSET>

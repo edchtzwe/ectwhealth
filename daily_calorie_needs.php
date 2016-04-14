@@ -18,19 +18,12 @@ session_start();
 <INPUT class=details pattern="\d+" placeholder=kg name=weight required>
 <INPUT class=details pattern="\d+" placeholder=cm name=height required>
 </P>
-<P><INPUT type=submit value=Submit name=submit><LABEL 
+<P><INPUT type=submit value=Next name=submit><LABEL 
 for=submit></LABEL></P></FORM>
 <P></P></FIELDSET> 
 
 <?php
-//display bod chart based on selected gender
-	if($_SESSION['gender'] == 1){
-		//male
-		include_once('male_chart.php');
-	}
-	else{
-		//female
-		include_once('female_chart.php');
-	}
+	if($_SESSION['bmr'] != null)
+	include_once('goals.php');
 ?>
 </BODY></HTML>
