@@ -23,7 +23,14 @@ for=submit></LABEL></P></FORM>
 <P></P></FIELDSET> 
 
 <?php
+//only show if bmr is already calculated
 	if($_SESSION['bmr'] != null)
-	include_once('goals.php');
+		include_once('goals.php');
+	
 ?>
+
+<FORM METHOD=POST ACTION='reset.php'>
+<INPUT TYPE=SUBMIT VALUE=Recalculate>
+</FORM>
+
 </BODY></HTML>

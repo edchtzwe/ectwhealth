@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML><HEAD><TITLE>Enter Page Title Here</TITLE>
 <META content="text/html; charset=utf-8" http-equiv=Content-Type>
 <link id="styles" title="cur_style" rel="stylesheet" type="text/css" href="style.css"/>
@@ -8,18 +8,12 @@
 <LEGEND>Select Goals</LEGEND>
 <FORM method=post action='estimate_process.php'>
 <P>
-<P>
 <INPUT type=radio value=0 id='a' name=bod>
-<LABEL FOR='a'> Less than 80 Push Ups, Less than 40 Aussie Pullups </LABEL>
-</P>
-<P>
+<LABEL FOR='a'> Lose Weight. </LABEL>
 <INPUT type=radio id='b' value=1 name=bod>
-<LABEL FOR='b'> More than 80 Push Ups, More than 40 Aussie Pullups </LABEL>
-</P>
-<p>
+<LABEL FOR='b'> Maintain Weight. </LABEL>
 <INPUT type=radio value=2 id='c' name=bod>
-<LABEL FOR='c'> More than 130 Push Ups, More than 50 Aussie Pullups </LABEL>
-</P>
+<LABEL FOR='c'> Gain Weight. </LABEL>
 </P>
 
 <P><INPUT type=submit value=Estimate name=Estimate></FORM></FIELDSET>
